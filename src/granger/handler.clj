@@ -1,4 +1,4 @@
-(ns hello-world.handler
+(ns granger.handler
   (:use compojure.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]))
