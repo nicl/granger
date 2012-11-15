@@ -30,20 +30,20 @@ books and reviews.
 The JSON schema for a book review is currently:
 
     {
-        created_at: "Thu, 15 Nov 2012 11:10:47 +0000",
-        isbn: "978-1-935182-64-1",
-        title: "The Joy of Clojure",
-        authors: [
+        "created_at": "Thu, 15 Nov 2012 11:10:47 +0000",
+        "isbn": "978-1-935182-64-1",
+        "title": "The Joy of Clojure",
+        "authors": [
             {
-                first_name: "Michael",
-                last_name: "Fogus"
+                "first_name": "Michael",
+                "last_name": "Fogus"
             },
             {
-                first_name: "Chris",
-                last_name: "Houser"
+                "first_name": "Chris",
+                "last_name": "Houser"
             }
         ],
-        text: "Here is some review text as a plain text string..."
+        "text": "Here is some review text as a plain text string..."
     }
 
 We don't store much information about a book; the ISBN provides an
