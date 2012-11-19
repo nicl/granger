@@ -1,4 +1,4 @@
-(ns granger.model
+(ns granger.models.books
   (:use ring.util.response)
   (:require [somnium.congomongo :as mongo]))
 
