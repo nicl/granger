@@ -1,20 +1,24 @@
 (ns granger.model)
 
-(defn create!
+(defn add-book!
   "Create new book review"
-  [data])
+  [data]
+  "You have added a new book!")
 
-(defn update!
+(defn update-book!
   "Update existing book review"
-  [id data])
+  [id data]
+  "An update action.")
 
-(defn find-one
+(defn find-book
   "Returns a book review"
   [id]
-  (str "You are looking for the following ID:" id))
+  "A single book.")
 
-(defn find-all
-  "Returns a collection of book reviews")
+(defn find-books
+  "Returns a collection of book reviews"
+  []
+  "A list of all books.")
 
 (defn is-valid?
   "Whether data is a valid book review representation"
