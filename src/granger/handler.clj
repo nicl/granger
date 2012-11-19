@@ -2,17 +2,14 @@
   (:use compojure.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
-            [granger.model :as model]
-            [granger.middleware.connect :as connect]))
+            [granger.models.books :as books]))
 
 (defroutes app-routes
   (GET "/" [] "Welcome to my book reviews site!")
-  (GET "/books" [] (model/find-books))
-  (GET "/books/:id" [id] (model/find-book id))
-  (POST "/books" [body] (model/add-book! body))
-  (PUT "/books/:id" [id body] (model/update-book! id body))
+  (GET "/books" [] (books/find-books))
+  (GET "/books/:isbn" [isbn] (books/find-book isbn))
+  (POST "/books" [body] (books/add-book! body))
+  (PUT "/books/:isbn" [isbn] (books/update-book! isbn))
   (route/not-found "Not Found"))
 
-(def app
-(-> (handler/site app-routes)
-    (connect/wrap-connection)))
+(def app (handler/site app-routes))
