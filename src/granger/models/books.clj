@@ -10,7 +10,7 @@
 (defn add-book!
   "Create new book review"
   [data]
-  "You have added a new book!")
+  (mongo/with-mongo conn (mongo/insert! :test data)))
 
 (defn update-book!
   "Update existing book review"
