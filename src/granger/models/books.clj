@@ -14,8 +14,9 @@
 
 (defn update-book!
   "Update existing book review"
-  [id data]
-  "An update action.")
+  [old updates]
+  (mongo/with-mongo conn
+    (mongo/update! :test old (merge old updates))))
 
 (defn find-book
   "Returns book review for a given ISBN"
