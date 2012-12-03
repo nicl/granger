@@ -7,14 +7,31 @@
                          :host "127.0.0.1"
                          :port 27017))
 
+(def book-keys #{:created_at
+                 :isbn
+                 :title
+                 :authors
+                 :text})
+
+(defn keys-exist [whitelist vals]
+  (every? (partial contains? whitelist) vals))
+
+(defn valid-book?
+  "Check that map is a valid representation of a book"
+  [m]
+  (and (keys-exist book-keys (keys m))
+       (keys-exist m book-keys)))
+
 (defn add-book!
   "Create new book review"
-  [data]
-  (mongo/with-mongo conn (mongo/insert! :test data)))
+  [book]
+  {:pre [(valid-book? book)]}
+  (mongo/with-mongo conn (mongo/insert! :test book)))
 
 (defn update-book!
   "Update existing book review"
   [old updates]
+  {:pre [(valid-book? (merge old updates))]}
   (mongo/with-mongo conn
     (mongo/update! :test old (merge old updates))))
 
@@ -31,7 +48,3 @@
   []
   (mongo/with-mongo conn
     (response (mongo/fetch :test :as :json))))
-
-(defn is-valid?
-  "Whether data is a valid book review representation"
-  [data])
