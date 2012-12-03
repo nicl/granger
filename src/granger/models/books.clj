@@ -39,12 +39,12 @@
   "Returns book review for a given ISBN"
   [isbn]
   (mongo/with-mongo conn
-    (response (mongo/fetch-one :test
-                               :as :json
-                               :where {:isbn isbn}))))
+    (mongo/fetch-one :test
+                     :as :json
+                     :where {:isbn isbn})))
 
 (defn find-books
   "Returns a collection of book reviews"
   []
   (mongo/with-mongo conn
-    (response (mongo/fetch :test :as :json))))
+    (mongo/fetch :test :as :json)))
