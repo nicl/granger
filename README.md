@@ -24,28 +24,30 @@ Then, start the server, run:
 Storage
 -------
 
-Granger currently uses [MongoDB](http://www.mongodb.org/) to store
-books and reviews.
+Granger currently uses [Elasticsearch](http://www.elasticsearch.org/)
+to store books and reviews.
 
-The JSON schema for a book review is currently:
+Formats
+-------
+
+Book resources are represented as follows:
 
     {
-        "created_at": "Thu, 15 Nov 2012 11:10:47 +0000",
-        "isbn": "978-1-935182-64-1",
+        "authors": [ "Michael Fogus", "Chris Houser" ],
+        "created_at": "2014-11-15T11:10:47.000Z",
+        "categories": [ "Computers" ],
+        "isbn": "9781935182641",
+        "description": "About Clojure...",
         "title": "The Joy of Clojure",
-        "authors": [
-            {
-                "first_name": "Michael",
-                "last_name": "Fogus"
-            },
-            {
-                "first_name": "Chris",
-                "last_name": "Houser"
-            }
-        ],
-        "text": "Here is some review text as a plain text string..."
+        "review": "Here is some review text as a plain text string..."
     }
+
+All fields are mandatory apart from 'review'.
 
 We don't store much information about a book; the ISBN provides an
 easy way for interested parties to find out details such as the
-publisher, page count, etc.
+publisher, page count, etc. A good source of information (used here)
+is the Google Books API.
+
+The structure of the API itself is that of the
+[JSON API format](http://jsonapi.org/).
