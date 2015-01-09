@@ -42,15 +42,21 @@
      :description (get-volume-info bk :description)
      :title (get-volume-info bk :title)}))
 
-(defn add-to-api
+(defn add-to-api!
   [book]
   (let [isbn (:isbn book)
         url (str granger-api-url isbn)]
-    (client/put url {:form-params book :content-type :json})))
+    (println (str "Are you sure you want to add '" (:title book) "'? (y/n)"))
+    (loop []
+      (case (read-line)
+        "y" (client/put url {:form-params book :content-type :json})
+        "n" nil
+        (do (println "Unrecognised input please try again... (y/n)")
+            (recur))))))
 
-(defn add-book
+(defn add-book!
   [isbn]
   (-> isbn
       fetch-book-by-isbn
       convert-format
-      add-to-api))
+      add-to-api!))

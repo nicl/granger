@@ -22,7 +22,6 @@
 (defn valid-book?
   "Check that map is a valid representation of a book"
   [m]
-  (prn "book is: " m)
   (and (keys-exist book-keys (keys m))
        (keys-exist m book-keys)))
 
@@ -30,7 +29,8 @@
   "Create book review, or update if already exists"
   [isbn book]
   {:pre [(valid-book? book)]}
-  (created (esd/put conn index doc-type isbn book))) ;; note this does not return successfully
+  (let [resource (esd/put conn index doc-type isbn book)]
+    (created isbn resource))) ;; needs error handling like everything else here
 
 (defn fetch-book
   "Fetch book review for a given ISBN"
@@ -44,3 +44,11 @@
   (let [hits (esr/hits-from (esd/search conn index doc-type
                                         :query {:match_all {}}))]
     (response (map :_source hits))))
+
+;; example book
+
+(def example-book {:authors ["john" "mark"]
+                   :categories ["Fiction"]
+                   :isbn 12355
+                   :description "all you wanted was my heart"
+                   :title "living free but from a prison cell"})
